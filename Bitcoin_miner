@@ -1,0 +1,20 @@
+import hashlib
+
+NONCE_LIMIT = 1000000000000
+
+zeroes = 4
+
+def mine(block_number, transactions, previous_hash):
+    for nonce in range(NONCE_LIMIT):
+        base_text = str(block_number) + transactions + previous_hash + str(nonce)
+        hash_try = hashlib.sha256(base_text.encode()).hexdigest()
+        if hash_try.startswith('0' * zeroes):
+            print(f"Found Hash with Nonce: {nonce}")
+            return hash_try
+    return -1
+
+block_number = 24
+transactions = "3f9f9j39j39j93"
+previous_hash = "39fmfmef30030fww8w99w"
+
+mine(block_number, transactions, previous_hash)
