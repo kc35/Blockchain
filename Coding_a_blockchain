@@ -1,0 +1,23 @@
+import hashlib
+
+class newcoinblock:
+
+    def __init__(self, previous_block_hash, transaction_list):
+        self.previous_block_hash = previous_block_hash
+        self.transaction_list = transaction_list
+
+        self.block_data = "-".join(transaction_list) + "-" + previous_block_hash
+        self.block_hash = hashlib.sha256(self.block_data.encode()).hexdigest()
+
+t1 = "A sends 2 NC to B"
+t2 = "C sends 4.1 NC to B"
+t3 = "B sends 3.2 NC to C"
+t4 = "D sends 0.3 NC to A"
+t5 = "B sends 1 NC to E"
+t6 = "B sends 5.4 NC to D"
+
+initial_block = newcoinblock("Initial String", [t1, t2])
+
+print(initial_block.block_data)
+print(initial_block.block_hash)
+
